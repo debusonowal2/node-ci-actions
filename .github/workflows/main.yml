@@ -1,0 +1,28 @@
+name: deploy-app
+
+# Trigger the workflow on a push event targeting the main branch
+on:
+  push:
+    branches:
+      - feature-deploy
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Setup Nodejs
+      - name: Setup Nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # Step 3: Run your commands
+      - name: Install dependencies
+        run: npm install
+
+      # Step 3: Run your commands
+      - name: Run tests
+        run: npm test
